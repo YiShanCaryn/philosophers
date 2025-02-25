@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 11:12:19 by yisho             #+#    #+#             */
-/*   Updated: 2025/02/25 11:37:02 by yisho            ###   ########.fr       */
+/*   Updated: 2025/02/25 15:11:06 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,15 @@ int	check_argvs(char **argv)
 
 int	main(int argc, char **argv)
 {
+	t_table	table;
+
 	if (argc != 5 && argc != 6)
 		return (ft_putstr_fd("Wrong argument count\n", 2), 1);
 	if (check_argvs(argv))
 		return (1);
+	init_program(&table);
+	thread_create(&table);
+	//when philo full or one philo died
+	clear_all(&table);
 	return (0);
 }
