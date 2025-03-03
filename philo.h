@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 11:13:41 by yisho             #+#    #+#             */
-/*   Updated: 2025/02/25 15:09:51 by yisho            ###   ########.fr       */
+/*   Updated: 2025/02/28 14:44:25 by yishan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define PHILO_H
 
 # include <pthread.h>
+# include <errno.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include "libft/libft.h"
 
-# define MAX_PHILO 200
+# define MAX_PHILO 400
 
 typedef struct s_philo	t_philo;
 
@@ -34,11 +35,14 @@ typedef struct s_fork
 //table (./philo 5 800 200 100 [8])
 typedef struct s_table
 {
-	long	nbr_philo;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	t_fork	*fork;
+	int		num_of_philos;
+	size_t	time_to_die;
+	size_t	time_to_eat;
+	size_t	time_to_sleep;
+	size_t	num_times_to_eat;
+	int		start_flag;
+	bool	end_flag;
+	t_fork	*forks;
 	t_philo	*philo;
 }	t_table;
 
@@ -47,13 +51,37 @@ typedef struct s_philo
 {
 	pthread_t	thread_id;
 	int			philo_id;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
-	long		nbr_of_meal;
-	long		time_last_meal;
+	t_fork		*fork_one;
+	t_fork		*fork_two;
+	int			num_of_meal;
+	size_t		time_last_meal;
 	bool		full;
 	t_table		*table;
 }	t_philo;
+
+typedef enum e_opcode
+{
+	MUTEX_INIT,
+	MUTEX_LOCK,
+	MUTEX_UNLOCK,
+	MUTEX_DESTROY,
+	THREAD_CREATE,
+	THREAD_JOIN,
+	THREAD_DETACH
+}	t_opcode;
+
+//Initializing
+void	init_input(t_table *table, char **argv);
+void	init_program(t_table *table);
+
+//error handle
+void	*handle_malloc(size_t bytes);
+void	thread_handle(pthread_t *thread, void *(*foo)(void *),
+			void *data, t_opcode operation);
+void	mutex_handle(pthread_mutex_t *mutex, t_opcode operation);
+
+//thread_create
+void	thread_create(t_table *table);
 
 
 #endif
