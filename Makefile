@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yishan <yishan@student.42.fr>              +#+  +:+       +#+         #
+#    By: yisho <yisho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 11:13:55 by yisho             #+#    #+#              #
-#    Updated: 2025/02/28 10:13:19 by yishan           ###   ########.fr        #
+#    Updated: 2025/03/04 15:46:14 by yisho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -O3 -pthread
 
 NAME = philo
 
-SRC = main.c init.c error_handle.c thread_create.c
+SRC = main.c init.c error_handle.c thread_create.c utils.c
 
 OBJ = $(SRC:.c=.o)
 

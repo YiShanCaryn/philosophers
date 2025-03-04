@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 09:54:21 by yishan            #+#    #+#             */
-/*   Updated: 2025/03/04 10:02:59 by yisho            ###   ########.fr       */
+/*   Updated: 2025/03/04 15:38:15 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	init_program(t_table *table)
 
 	i = 0;
 	table->end_flag = false;
-	table->all_philos_ready = false;
+	table->is_all_ready = false;
+	mutex_handle(&table->table_mutex, MUTEX_INIT);
 	table->philo = handle_malloc(sizeof(t_philo) * table->num_of_philos);
 	table->forks = handle_malloc(sizeof(t_fork) * table->num_of_philos);
 	while (i < table->num_of_philos)

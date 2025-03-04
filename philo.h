@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 11:13:41 by yisho             #+#    #+#             */
-/*   Updated: 2025/03/04 10:01:08 by yisho            ###   ########.fr       */
+/*   Updated: 2025/03/04 15:49:28 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,17 @@ typedef struct s_fork
 //table (./philo 5 800 200 100 [8])
 typedef struct s_table
 {
-	int		num_of_philos;
-	size_t	time_to_die;
-	size_t	time_to_eat;
-	size_t	time_to_sleep;
-	size_t	num_times_to_eat;
-	int		start_flag;
-	bool	end_flag;
-	bool	all_philos_ready;
-	t_fork	*forks;
-	t_philo	*philo;
+	int				num_of_philos;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	size_t			num_times_to_eat;
+	int				start_flag;
+	bool			end_flag;
+	bool			is_all_ready;
+	t_fork			*forks;
+	t_philo			*philo;
+	pthread_mutex_t	table_mutex;
 }	t_table;
 
 //struct for philo
@@ -83,6 +84,9 @@ void	mutex_handle(pthread_mutex_t *mutex, t_opcode operation);
 
 //thread_create
 void	thread_create(t_table *table);
+
+void	set_lock(pthread_mutex_t *mutex, bool *dest, bool value);
+bool	get_lock(pthread_mutex_t *mutex, bool *value);
 
 
 #endif

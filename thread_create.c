@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 10:12:46 by yishan            #+#    #+#             */
-/*   Updated: 2025/03/04 09:59:37 by yisho            ###   ########.fr       */
+/*   Updated: 2025/03/04 15:26:36 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	*dinner_start(void *data)
 	t_philo	*philo;
 	
 	philo = (t_philo *)data;
+	wait_all_philos_ready(philo->table);	
 	
 	return (NULL);
 }
@@ -44,5 +45,6 @@ void	thread_create(t_table *table)
 			dinner_start, &table->philo[i], THREAD_CREATE);
 		i++;
 	}
+	
 }
   
