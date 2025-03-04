@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 09:54:21 by yishan            #+#    #+#             */
-/*   Updated: 2025/02/28 10:10:36 by yishan           ###   ########.fr       */
+/*   Updated: 2025/03/04 10:02:59 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ void	init_program(t_table *table)
 
 	i = 0;
 	table->end_flag = false;
+	table->all_philos_ready = false;
 	table->philo = handle_malloc(sizeof(t_philo) * table->num_of_philos);
 	table->forks = handle_malloc(sizeof(t_fork) * table->num_of_philos);
 	while (i < table->num_of_philos)
 	{
-		mutex_handle(&table->forks[i].fork);
+		mutex_handle(&table->forks[i].fork, MUTEX_INIT);
 		table->forks[i].fork_id = i;
 		i++;
 	}

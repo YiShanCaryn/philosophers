@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 11:13:41 by yisho             #+#    #+#             */
-/*   Updated: 2025/02/28 14:44:25 by yishan           ###   ########.fr       */
+/*   Updated: 2025/03/04 10:01:08 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_table
 	size_t	num_times_to_eat;
 	int		start_flag;
 	bool	end_flag;
+	bool	all_philos_ready;
 	t_fork	*forks;
 	t_philo	*philo;
 }	t_table;
