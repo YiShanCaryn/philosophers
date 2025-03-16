@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yisho <yisho@student.42.fr>                +#+  +:+       +#+         #
+#    By: yishan <yishan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/24 11:13:55 by yisho             #+#    #+#              #
-#    Updated: 2025/03/04 15:46:14 by yisho            ###   ########.fr        #
+#    Created: 2025/03/14 18:30:07 by yishan            #+#    #+#              #
+#    Updated: 2025/03/15 14:49:00 by yishan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,30 +16,23 @@ CFLAGS = -Wall -Wextra -Werror -O3 -pthread
 
 NAME = philo
 
-SRC = main.c init.c error_handle.c thread_create.c utils.c
+SRC = philo.c utils.c init.c thread_create.c philos_routine.c monitor_routine.c
 
 OBJ = $(SRC:.c=.o)
-
-LIBFT = libft/libft.a
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
-
-$(LIBFT):
-	make -C libft
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
 
 all: $(NAME)
 
 clean:
 	rm -f $(OBJ)
-	make clean -C libft
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C libft
 
 re: fclean all
 

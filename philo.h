@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 11:13:41 by yisho             #+#    #+#             */
-/*   Updated: 2025/03/04 15:49:28 by yisho            ###   ########.fr       */
+/*   Updated: 2025/03/16 17:41:34 by yishan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,77 +16,75 @@
 # include <pthread.h>
 # include <errno.h>
 # include <unistd.h>
+# include <stdio.h>  // For printf
 # include <stdlib.h>
-# include <stdio.h>
 # include <stdbool.h>
-# include "libft/libft.h"
+# include <stdint.h>
+# include <sys/time.h>
 
-# define MAX_PHILO 400
+# define MAX_PHILOS 400
+# define FALSE 0
+# define TRUE 1
 
-typedef struct s_philo	t_philo;
+typedef struct s_table	t_table;
 
 //struct for mutex(fork)
 typedef struct s_fork
 {
 	pthread_mutex_t	fork;
-	int				fork_id;
 }	t_fork;
+
+//struct for philo
+typedef struct s_philo
+{
+	pthread_t		thread_id;
+	int				philo_id;
+	t_fork			*fork_one;
+	t_fork			*fork_two;
+	int				num_meals_eaten;
+	long			last_meal_time;
+	pthread_mutex_t	meal_lock;
+	t_table			*table;
+}	t_philo;
 
 //table (./philo 5 800 200 100 [8])
 typedef struct s_table
 {
 	int				num_of_philos;
-	size_t			time_to_die;
-	size_t			time_to_eat;
-	size_t			time_to_sleep;
-	size_t			num_times_to_eat;
-	int				start_flag;
-	bool			end_flag;
-	bool			is_all_ready;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				num_times_to_eat;
+	long			start_time;
+	int				end_flag;
+	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	table_mutex; //write lock
+	pthread_t		monitor;
 	t_fork			*forks;
 	t_philo			*philo;
-	pthread_mutex_t	table_mutex;
 }	t_table;
 
-//struct for philo
-typedef struct s_philo
-{
-	pthread_t	thread_id;
-	int			philo_id;
-	t_fork		*fork_one;
-	t_fork		*fork_two;
-	int			num_of_meal;
-	size_t		time_last_meal;
-	bool		full;
-	t_table		*table;
-}	t_philo;
+int		ft_atoi(const char *str);
+void	error_exit(const char *msg, t_table *table);
+void	cleanup_program(t_table *table);
+long	get_current_time(void);
+void	ft_usleep(long time);
 
-typedef enum e_opcode
-{
-	MUTEX_INIT,
-	MUTEX_LOCK,
-	MUTEX_UNLOCK,
-	MUTEX_DESTROY,
-	THREAD_CREATE,
-	THREAD_JOIN,
-	THREAD_DETACH
-}	t_opcode;
-
-//Initializing
 void	init_input(t_table *table, char **argv);
 void	init_program(t_table *table);
 
-//error handle
-void	*handle_malloc(size_t bytes);
-void	thread_handle(pthread_t *thread, void *(*foo)(void *),
-			void *data, t_opcode operation);
-void	mutex_handle(pthread_mutex_t *mutex, t_opcode operation);
-
-//thread_create
 void	thread_create(t_table *table);
+void	*monitor_routine(void *data);
+void	*dinner_routine(void *data);
+int		dead_loop(t_philo *philo);
 
-void	set_lock(pthread_mutex_t *mutex, bool *dest, bool value);
-bool	get_lock(pthread_mutex_t *mutex, bool *value);
+void	philo_think(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_eat(t_philo *philo);
+
+void	print_message(char *str, t_philo *philo, int id);
+int		check_philosopher_death(t_table *table);
+int		check_all_philosophers_ate(t_table *table);
 
 
 #endif

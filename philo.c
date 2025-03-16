@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 11:12:19 by yisho             #+#    #+#             */
-/*   Updated: 2025/02/28 10:14:17 by yishan           ###   ########.fr       */
+/*   Created: 2025/03/14 18:31:21 by yishan            #+#    #+#             */
+/*   Updated: 2025/03/15 18:52:07 by yishan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,19 @@ int	check_content(char *argv)
 
 int	check_argvs(char **argv)
 {
-	if (ft_atoi(argv[1]) > MAX_PHILO || ft_atoi(argv[1]) <= 0
-		|| check_content(argv[1]))
-		return (ft_putstr_fd("Invalid number of philosophers\n", 2), 1);
-	if (ft_atoi(argv[2]) <= 0 || check_content(argv[2]))
-		return (ft_putstr_fd("Invalid time to die\n", 2), 1);
-	if (ft_atoi(argv[3]) <= 0 || check_content(argv[3]))
-		return (ft_putstr_fd("Invalid time to eat\n", 2), 1);
-	if (ft_atoi(argv[4]) <= 0 || check_content(argv[4]))
-		return (ft_putstr_fd("Invalid time to sleep\n", 2), 1);
-	if (argv[5] && (ft_atoi(argv[5]) < 0 || check_content(argv[5])))
-	{
-		ft_putstr_fd("Invalid number of times each philosopher must eat\n", 2);
-		return (1);
-	}
-	return (0);
+	if (ft_atoi(argv[1]) > MAX_PHILOS || ft_atoi(argv[1]) <= 0)
+		printf("Error: Invalid number of philosophers, maximum 300\n");
+	else if (ft_atoi(argv[2]) <= 0)
+		printf("Error: Invalid time to die\n");
+	else if (ft_atoi(argv[3]) <= 0)
+		printf("Error: Invalid time to eat\n");
+	else if (ft_atoi(argv[4]) <= 0)
+		printf("Error: Invalid time to sleep\n");
+	else if (argv[5] && ft_atoi(argv[5]) < 0)
+		printf("Error: Invalid number of times each philosopher must eat\n");
+	else
+		return (0);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv)
@@ -50,13 +48,15 @@ int	main(int argc, char **argv)
 	t_table	table;
 
 	if (argc != 5 && argc != 6)
-		return (ft_putstr_fd("Wrong argument count\n", 2), 1);
+	{
+		printf("Error: Wrong argument count.\n");
+		return (1);
+	}
 	if (check_argvs(argv))
 		return (1);
 	init_input(&table, argv);
 	init_program(&table);
 	thread_create(&table);
-	//when philo full or one philo died
-	//clear_all(&table);
+	cleanup_program(&table);
 	return (0);
 }
