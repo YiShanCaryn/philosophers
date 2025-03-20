@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:01:10 by yishan            #+#    #+#             */
-/*   Updated: 2025/03/16 17:50:57 by yishan           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:02:41 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ static int	philosopher_death(t_philo *philo)
 	current_time = get_current_time();
 	time_since_last_meal = current_time - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->meal_lock);
-
-	printf("Philosopher %d: current_time = %ld, last_meal_time = %ld, time_since_last_meal = %ld\n", 
-		philo->philo_id, current_time, philo->last_meal_time, time_since_last_meal);
 
 	if (time_since_last_meal >= philo->table->time_to_die)
 	{

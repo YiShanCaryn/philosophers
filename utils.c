@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:31:52 by yishan            #+#    #+#             */
-/*   Updated: 2025/03/16 18:00:34 by yishan           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:04:02 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_usleep(long time)
 
 	start = get_current_time();
 	while ((get_current_time() - start) < time)
-		usleep(300);
+		usleep(100);
 }
 
 void	cleanup_program(t_table *table)

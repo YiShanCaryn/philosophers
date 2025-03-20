@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 12:34:39 by yishan            #+#    #+#             */
-/*   Updated: 2025/03/16 18:05:42 by yishan           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:03:51 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*monitor_routine(void *data)
 			printf("Monitor: All philosophers have finished eating.\n");
 			break ;
 		}
-		ft_usleep(200);
+		ft_usleep(100);
 	}
 	return (NULL);
 }
