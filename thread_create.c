@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 12:34:39 by yishan            #+#    #+#             */
-/*   Updated: 2025/04/08 11:38:17 by yisho            ###   ########.fr       */
+/*   Updated: 2025/04/08 15:10:03 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	*monitor_routine(void *data)
 			printf("All philosophers have finished eating.\n");
 			break ;
 		}
-		ft_usleep(100);
 	}
 	return (NULL);
 }

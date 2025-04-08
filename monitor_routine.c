@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:01:10 by yishan            #+#    #+#             */
-/*   Updated: 2025/04/08 11:42:54 by yisho            ###   ########.fr       */
+/*   Updated: 2025/04/08 13:37:12 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ static int	philosopher_death(t_philo *philo)
 	current_time = get_current_time();
 	time_since_last_meal = current_time - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->meal_lock);
-
 	if (time_since_last_meal >= philo->table->time_to_die)
 	{
-		printf("Philosopher %d has died due to time_to_die.\n", philo->philo_id);
 		return (1);
 	}
 	return (0);
@@ -55,7 +53,6 @@ int	check_philosopher_death(t_table *table)
 		if (philosopher_death(&table->philo[i]))
 		{
 			print_message("died", &table->philo[i], table->philo[i].philo_id);
-
 			pthread_mutex_lock(&table->dead_lock);
 			table->end_flag = 1;
 			pthread_mutex_unlock(&table->dead_lock);

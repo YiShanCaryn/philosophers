@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 11:13:41 by yisho             #+#    #+#             */
-/*   Updated: 2025/03/16 17:41:34 by yishan           ###   ########.fr       */
+/*   Updated: 2025/04/08 15:18:54 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <pthread.h>
 # include <errno.h>
 # include <unistd.h>
-# include <stdio.h>  // For printf
+# include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <stdint.h>
@@ -58,7 +58,7 @@ typedef struct s_table
 	long			start_time;
 	int				end_flag;
 	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	table_mutex; //write lock
+	pthread_mutex_t	table_mutex;
 	pthread_t		monitor;
 	t_fork			*forks;
 	t_philo			*philo;
@@ -85,6 +85,5 @@ void	philo_eat(t_philo *philo);
 void	print_message(char *str, t_philo *philo, int id);
 int		check_philosopher_death(t_table *table);
 int		check_all_philosophers_ate(t_table *table);
-
 
 #endif

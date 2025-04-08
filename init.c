@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:30:55 by yishan            #+#    #+#             */
-/*   Updated: 2025/04/08 11:43:24 by yisho            ###   ########.fr       */
+/*   Updated: 2025/04/08 14:47:15 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	init_input(t_table *table, char **argv)
 		table->num_times_to_eat = -1;
 }
 
-// Even philosophers take the right fork first
-// Odd philosophers take the left fork first
 void	init_forks(t_philo *philo, t_fork *fork, int philo_position)
 {
 	int	nbr_philo;

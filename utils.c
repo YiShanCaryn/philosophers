@@ -6,7 +6,7 @@
 /*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:31:52 by yishan            #+#    #+#             */
-/*   Updated: 2025/03/20 16:04:02 by yisho            ###   ########.fr       */
+/*   Updated: 2025/04/08 14:31:30 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void	cleanup_program(t_table *table)
 	{
 		i = 0;
 		while (i < table->num_of_philos)
-		{
-			pthread_mutex_destroy(&table->forks[i].fork);
-			i++;
-		}
+			pthread_mutex_destroy(&table->forks[i++].fork);
 		free(table->forks);
 		table->forks = NULL;
 	}
@@ -48,10 +45,7 @@ void	cleanup_program(t_table *table)
 	{
 		i = 0;
 		while (i < table->num_of_philos)
-		{
-			pthread_mutex_destroy(&table->philo[i].meal_lock);
-			i++;
-		}
+			pthread_mutex_destroy(&table->philo[i++].meal_lock);
 		free(table->philo);
 		table->philo = NULL;
 	}
