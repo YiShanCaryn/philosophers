@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yishan <yishan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yisho <yisho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:30:55 by yishan            #+#    #+#             */
-/*   Updated: 2025/03/15 16:59:16 by yishan           ###   ########.fr       */
+/*   Updated: 2025/04/08 11:43:24 by yisho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,8 @@ void	init_forks(t_philo *philo, t_fork *fork, int philo_position)
 	int	nbr_philo;
 
 	nbr_philo = philo->table->num_of_philos;
-	if (philo->philo_id % 2 == 0)
-	{
-		philo->fork_one = &fork[(philo_position + 1) % nbr_philo];
-		philo->fork_two = &fork[philo_position];
-	}
-	else
-	{
-		philo->fork_one = &fork[philo_position];
-		philo->fork_two = &fork[(philo_position + 1) % nbr_philo];
-	}
+	philo->fork_one = &fork[(philo_position + 1) % nbr_philo];
+	philo->fork_two = &fork[philo_position];
 }
 
 //position of philo in table
