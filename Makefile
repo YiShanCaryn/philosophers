@@ -6,7 +6,7 @@
 #    By: yisho <yisho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 18:30:07 by yishan            #+#    #+#              #
-#    Updated: 2025/04/08 15:55:37 by yisho            ###   ########.fr        #
+#    Updated: 2025/04/14 11:45:56 by yisho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ NAME = philo
 SRC = philo.c utils.c init.c thread_create.c philos_routine.c monitor_routine.c
 
 OBJ = $(SRC:.c=.o)
+
+SAN = -fsanitize=address -fsanitize=leak
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
